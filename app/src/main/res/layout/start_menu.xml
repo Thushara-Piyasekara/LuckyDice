@@ -18,7 +18,10 @@
             android:id="@+id/introText"
             android:layout_marginTop="89dp"
             android:layout_marginBottom="96dp"
-            app:layout_constraintBottom_toTopOf="@+id/newGameButt" />
+            app:layout_constraintBottom_toTopOf="@+id/newGameButt"
+            android:textSize="40sp"
+            android:textColor="#00BCD4"
+            android:textStyle="bold" />
 
     <Button
             android:text="@string/new_game"
