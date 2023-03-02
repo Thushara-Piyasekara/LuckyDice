@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Dice Game - CW1</string>
+    <string name="about">About</string>
+    <string name="dice_roller_game">Dice Roller Game</string>
+    <string name="new_game">New Game</string>
+    <string name="about_plagarism">I confirm that I understand what plagiarism is and have read and understood the section on Assessment Offences in the Essential Information for Students. The work that I have submitted is entirely my own. Any work from other authors is duly referenced and acknowledged.</string>
+    <string name="ok">OK</string>
 </resources>
