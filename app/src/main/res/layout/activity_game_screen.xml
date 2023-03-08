@@ -1,8 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".GameScreen">
+
+    <Button
+            android:text="Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scoreButt"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="44dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+            android:text="Throw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/throwButt"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="60dp"
+            android:layout_marginBottom="44dp" />
+
+    <ImageButton
+            android:layout_width="87dp"
+            android:layout_height="84dp"
+            android:id="@+id/dice1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="64dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="TODO" />
+
+    <ImageButton
+            android:layout_width="87dp"
+            android:layout_height="84dp"
+            android:id="@+id/dice2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="172dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="TODO" />
+
+    <ImageButton
+            android:layout_width="87dp"
+            android:layout_height="84dp"
+            android:id="@+id/dice4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="392dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="TODO" />
+
+    <ImageButton
+            android:layout_width="87dp"
+            android:layout_height="84dp"
+            android:id="@+id/dice3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="280dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="TODO" />
+
+    <ImageButton
+            android:layout_width="87dp"
+            android:layout_height="84dp"
+            android:id="@+id/dice5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="496dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="TODO" />
+
+    <TextView
+            android:text="Player Count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="28dp"
+            android:id="@+id/counterHuman"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="284dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

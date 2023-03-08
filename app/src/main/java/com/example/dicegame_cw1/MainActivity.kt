@@ -23,10 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         //Setting actionListener for "New Game" button
         val newGameButt = findViewById<Button>(R.id.newGameButt)
+
         newGameButt.setOnClickListener {
             val intent = Intent(this, GameScreen::class.java)
             startActivity(intent)
         }
+
     }
 
 
