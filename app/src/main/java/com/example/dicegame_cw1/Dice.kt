@@ -1,10 +1,11 @@
 package com.example.dicegame_cw1
 
+import android.graphics.Color
 import android.widget.ImageButton
 import kotlin.random.Random
 
-class Dice//Constructor for the Dice object
-    (private val imageButt: ImageButton) {
+//Constructor for the Dice object
+class Dice(private val imageButt: ImageButton) {
     private var numOfSides: Int = 6
     private var headVal: Int = 0
     private var count: Int = 0
@@ -19,23 +20,37 @@ class Dice//Constructor for the Dice object
     )
 
     init {
-        this.imageButt.setBackgroundResource(R.drawable.dice_1)
+        this.imageButt.setImageResource(R.drawable.dice_1)
+        resetDiceBackground()
+        setDiceOnClickListner()
     }
 
     //Assigns a random number between 1-6 to the Dice object
     fun roll() {
+        resetDiceBackground()
         headVal = Random.nextInt(1, numOfSides + 1)
-        this.imageButt.setBackgroundResource(diceImagesArr[headVal-1])
+        this.imageButt.setImageResource(diceImagesArr[headVal - 1])
         count += headVal
     }
 
     //Returns the image button of the respective Dice object
-    fun getImgButt():ImageButton {
+    fun getImgButt(): ImageButton {
         return this.imageButt
     }
 
-    fun getHeadVal():Int {
+    fun getHeadVal(): Int {
         return headVal
+    }
+
+    private fun setDiceOnClickListner() {
+        this.imageButt.setOnClickListener {
+            this.imageButt.setBackgroundColor(Color.GREEN)
+        }
+    }
+
+    private fun resetDiceBackground() {
+        this.imageButt.setBackgroundColor(Color.TRANSPARENT)
+
     }
 
 }

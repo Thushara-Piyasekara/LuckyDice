@@ -28,68 +28,9 @@
             android:layout_marginStart="60dp"
             android:layout_marginBottom="44dp" />
 
-    <ImageButton
-            android:layout_width="87dp"
-            android:layout_height="84dp"
-            android:id="@+id/dice1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.138"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="64dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="TODO" />
-
-    <ImageButton
-            android:layout_width="87dp"
-            android:layout_height="84dp"
-            android:id="@+id/dice2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.138"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="172dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="TODO" />
-
-    <ImageButton
-            android:layout_width="87dp"
-            android:layout_height="84dp"
-            android:id="@+id/dice4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.138"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="392dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="TODO" />
-
-    <ImageButton
-            android:layout_width="87dp"
-            android:layout_height="84dp"
-            android:id="@+id/dice3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.138"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="280dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="TODO" />
-
-    <ImageButton
-            android:layout_width="87dp"
-            android:layout_height="84dp"
-            android:id="@+id/dice5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.138"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="496dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="TODO" />
 
     <TextView
-            android:text="Player Count"
+            android:text="00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -97,5 +38,67 @@
             android:id="@+id/counterHuman"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="284dp" />
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="212dp"
+            android:layout_height="481dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintVertical_bias="0.145">
+
+        <ImageButton
+                android:layout_width="87dp"
+                android:layout_height="84dp"
+                android:id="@+id/dice1"
+                android:scaleType="fitCenter"
+                android:contentDescription="TODO"
+                android:cropToPadding="false" />
+
+        <ImageButton
+                android:layout_width="87dp"
+                android:layout_height="84dp"
+                android:id="@+id/dice2"
+                android:scaleType="fitCenter"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                android:layout_width="87dp"
+                android:layout_height="84dp"
+                android:id="@+id/dice4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.138"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitCenter"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                android:layout_width="87dp"
+                android:layout_height="84dp"
+                android:id="@+id/dice3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.138"
+                app:layout_constraintTop_toTopOf="parent"
+
+                android:scaleType="fitCenter"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                android:layout_width="87dp"
+                android:layout_height="84dp"
+                android:id="@+id/dice5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.138"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitCenter"
+                android:contentDescription="TODO" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
