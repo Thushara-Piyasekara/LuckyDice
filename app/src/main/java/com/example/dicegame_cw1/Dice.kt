@@ -47,19 +47,6 @@ class Dice(private val imageButt: ImageButton) {
         }
     }
 
-//    //Sets the action listener for clicking on a Dice ImageButton
-//    fun setDiceOnClickListener() {
-//        this.imageButt.setOnClickListener {
-//            if (clicked) {
-//                resetDiceBackground()
-//                clicked = false
-//            } else {
-//                this.imageButt.setBackgroundColor(Color.GREEN)
-//                clicked = true
-//            }
-//        }
-//    }
-
     //Toggles the Dice from rolling
     fun toggleDiceRolling() {
         if (clicked) {

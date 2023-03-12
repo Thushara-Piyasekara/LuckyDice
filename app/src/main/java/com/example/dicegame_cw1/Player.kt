@@ -5,7 +5,7 @@ import android.widget.TextView
 open class Player(private val diceList: List<Dice>, private val counter: TextView) {
     private var numOfWins: Int = 0
     private var totalScore: Int = 0
-    private var rollScore: Int = 0
+    protected var rollScore: Int = 0
     protected var reRollCount: Int = 0
 
 

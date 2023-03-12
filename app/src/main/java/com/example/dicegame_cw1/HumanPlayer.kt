@@ -1,10 +1,8 @@
 package com.example.dicegame_cw1
+
 import android.widget.TextView
-import java.util.concurrent.locks.ReentrantLock
-import kotlin.math.acos
 
-
-class HumanPlayer(private val diceList: List<Dice>, private val counterHuman: TextView,private val activity: GameScreen):Player(diceList,counterHuman) {
+class HumanPlayer(private val diceList: List<Dice>, counterHuman: TextView, private val activity: GameScreen) : Player(diceList, counterHuman) {
     init {
         this.setDiceOnClickListener()
     }
@@ -18,10 +16,18 @@ class HumanPlayer(private val diceList: List<Dice>, private val counterHuman: Te
     }
 
 
-    override fun throwDices() {
-        super.throwDices()
-        if (reRollCount > 2) {
+    fun reRoll() {
+        if (reRollCount > 1) {
+            reRollCount = 0
             activity.startComputerAction()
+            throwDices()
+        } else {
+            throwDices()
         }
     }
+
+    fun scoreDices() {
+
+    }
+
 }
