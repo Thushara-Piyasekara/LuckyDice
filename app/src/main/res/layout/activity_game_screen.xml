@@ -6,19 +6,24 @@
         android:layout_height="match_parent"
         tools:context=".GameScreen">
 
+
+    <!--ButtonView for the Score button-->
     <Button
-            android:text="Score"
+            android:text="@string/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scoreButt"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="64dp"
             android:layout_marginBottom="44dp"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="111dp"
+            app:layout_constraintStart_toEndOf="@+id/throwButt" />
 
+    <!--ButtonView for the Throw button-->
     <Button
-            android:text="Throw"
+            android:text="@string/throwButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/throwButt"
@@ -29,76 +34,134 @@
             android:layout_marginBottom="44dp" />
 
 
+    <!--TextView for the score of the computer player-->
     <TextView
-            android:text="00"
+            android:text="@string/two_zeros"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:id="@+id/counterComputer"
+            android:textSize="24sp"
+            android:textColor="#3F51B5"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="292dp"
+            android:layout_marginEnd="95dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--TextView for the score of the human player-->
+
+
+    <!--LinearLayout containing the ImageButtons(Dices) of Computer player-->
+
+    <TextView
+            android:text="@string/two_zeros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="sans-serif-condensed"
             android:id="@+id/counterHuman"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="284dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="24sp"
+            android:textColor="#3F51B5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="92dp"
+            app:layout_constraintEnd_toStartOf="@+id/counterComputer"
+            android:layout_marginEnd="176dp" />
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="212dp"
-            android:layout_height="481dp"
+            android:layout_width="99dp"
+            android:layout_height="476dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintVertical_bias="0.145">
+            android:layout_marginEnd="60dp"
+            app:layout_constraintVertical_bias="0.408"
+            android:id="@+id/linearLayout2"
+            android:layout_marginStart="101dp"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout">
 
         <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="84dp"
-                android:id="@+id/dice1"
-                android:scaleType="fitCenter"
-                android:contentDescription="TODO"
-                android:cropToPadding="false" />
-
-        <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="84dp"
-                android:id="@+id/dice2"
-                android:scaleType="fitCenter"
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/c_dice1"
                 android:contentDescription="TODO" />
 
         <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="84dp"
-                android:id="@+id/dice4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.138"
-                app:layout_constraintTop_toTopOf="parent"
-                android:scaleType="fitCenter"
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/c_dice2"
                 android:contentDescription="TODO" />
 
         <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="84dp"
-                android:id="@+id/dice3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.138"
-                app:layout_constraintTop_toTopOf="parent"
-
-                android:scaleType="fitCenter"
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/c_dice4"
                 android:contentDescription="TODO" />
 
         <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="84dp"
-                android:id="@+id/dice5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.138"
-                app:layout_constraintTop_toTopOf="parent"
-                android:scaleType="fitCenter"
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/c_dice3"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/c_dice5"
                 android:contentDescription="TODO" />
 
     </LinearLayout>
+
+    <!--LinearLayout containing the ImageButtons(Dices) of human player-->
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="96dp"
+            android:layout_height="474dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="260dp"
+            app:layout_constraintVertical_bias="0.412"
+            android:id="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="55dp">
+
+        <ImageButton
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/h_dice1"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/h_dice2"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/h_dice4"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/h_dice3"
+                android:contentDescription="TODO" />
+
+        <ImageButton
+                style="@style/DiceImageButtonStyle"
+                android:background="@android:color/transparent"
+                android:id="@+id/h_dice5"
+                android:contentDescription="TODO" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
