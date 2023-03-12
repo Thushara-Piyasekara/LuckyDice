@@ -1,5 +1,6 @@
 package com.example.dicegame_cw1
 
+import android.widget.TextView
 import java.util.*
 
 /**
@@ -9,7 +10,7 @@ import java.util.*
  * @property Dices is the List of dice objects allocated to the computer player
  *
  */
-class DumbComputer(private val Dices: List<Dice>)  {
+class DumbComputer(private val Dices: List<Dice>,private val counter:TextView):Player(Dices,counter)  {
 
     fun pickDicesToKeep() {
 
@@ -24,5 +25,7 @@ class DumbComputer(private val Dices: List<Dice>)  {
         val random = Random()
         return random.nextBoolean()
     }
+
+//    fun pickNumberOf
 
 }

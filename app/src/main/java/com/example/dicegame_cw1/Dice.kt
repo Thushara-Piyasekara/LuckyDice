@@ -38,8 +38,8 @@ class Dice(private val imageButt: ImageButton) {
                 AnimationUtils.loadAnimation(this.imageButt.context, R.anim.rotate_anim)
             this.imageButt.startAnimation(rotateAnim)
 
+            headVal = Random.nextInt(1, numOfSides + 1)
             Handler(Looper.getMainLooper()).postDelayed({
-                headVal = Random.nextInt(1, numOfSides + 1)
                 this.imageButt.setImageResource(diceImagesArr[headVal - 1])
             }, 1000)
         } else {
