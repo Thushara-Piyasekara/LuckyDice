@@ -1,6 +1,5 @@
 package com.example.dicegame_cw1
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         //Setting actionListener for "About" button
         val aboutButt = findViewById<Button>(R.id.aboutButt)
         aboutButt.setOnClickListener {
-            showPopUpWindow(aboutButt)
+            showAboutPopUp(aboutButt)
         }
 
         //Setting actionListener for "New Game" button
@@ -28,13 +27,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GameScreen::class.java)
             startActivity(intent)
         }
-
     }
 
 
     //Makes the ABOUT popup window visible
-    @SuppressLint("InflateParams")
-    private fun showPopUpWindow(view: View) {
+    private fun showAboutPopUp(view: View) {
         val aboutPopup = layoutInflater.inflate(R.layout.about_popup_layout, null)
         val popupWindow = PopupWindow(
             aboutPopup,
@@ -42,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.WRAP_CONTENT
         )
         val popupCloseButt = aboutPopup.findViewById<Button>(R.id.popupClose)
+
         //Setting OnClickListener for the close button in the about popup
         popupCloseButt.setOnClickListener {
             popupWindow.dismiss()

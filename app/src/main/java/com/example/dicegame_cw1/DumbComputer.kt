@@ -12,11 +12,10 @@ import java.util.*
  * @property dices is the List of dice objects allocated to the computer player
  *
  */
-class DumbComputer(
+open class DumbComputer(
     private val dices: List<Dice>,
-    private val counter: TextView,
     private val activity: GameScreen
-) : Player(dices, counter) {
+) : Player(dices) {
 
     /**
      * Makes a decision to re roll and picks Dices to keep from re rolling upto two times
@@ -42,8 +41,8 @@ class DumbComputer(
 
     private fun makeReRollDecision(): Boolean {
         val random = Random()
-//        return random.nextBoolean()
-        return true
+        return random.nextBoolean()
+//        return true
     }
 
     private fun pickDicesToRoll(): List<Dice> {

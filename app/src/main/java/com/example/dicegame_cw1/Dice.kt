@@ -41,19 +41,19 @@ class Dice(private val imageButt: ImageButton) {
             headVal = Random.nextInt(1, numOfSides + 1)
             Handler(Looper.getMainLooper()).postDelayed({
                 this.imageButt.setImageResource(diceImagesArr[headVal - 1])
-            }, 1000)
+            }, 500)
         } else {
             clicked = false
         }
     }
 
     //Toggles the Dice from rolling
-    fun toggleDiceRolling() {
+    fun toggleDiceLock() {
         if (clicked) {
             resetDiceBackground()
             clicked = false
         } else {
-            this.imageButt.setBackgroundColor(Color.GREEN)
+            this.imageButt.setBackgroundColor(Color.parseColor("#FFC4D8"))
             clicked = true
         }
     }

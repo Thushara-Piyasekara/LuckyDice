@@ -1,8 +1,7 @@
 package com.example.dicegame_cw1
 
-import android.widget.TextView
 
-class HumanPlayer(private val diceList: List<Dice>, counterHuman: TextView, private val activity: GameScreen) : Player(diceList, counterHuman) {
+class HumanPlayer(private val diceList: List<Dice>, private val activity: GameScreen) : Player(diceList) {
     init {
         this.setDiceOnClickListener()
     }
@@ -10,13 +9,13 @@ class HumanPlayer(private val diceList: List<Dice>, counterHuman: TextView, priv
     private fun setDiceOnClickListener() {
         for (dice in diceList) {
             dice.getImgButt().setOnClickListener {
-                dice.toggleDiceRolling()
+                dice.toggleDiceLock()
             }
         }
     }
 
-
     fun reRoll() {
+        activity.getScoreButton().isEnabled = (reRollCount != 0)
         if (reRollCount > 1) {
             reRollCount = 0
             activity.startComputerAction()
@@ -26,8 +25,15 @@ class HumanPlayer(private val diceList: List<Dice>, counterHuman: TextView, priv
         }
     }
 
-    fun scoreDices() {
-
+    fun disableDiceSelection() {
+        for (dice in diceList) {
+            dice.getImgButt().isClickable = false
+        }
     }
 
+    fun enableDiceSelection() {
+        for (dice in diceList) {
+            dice.getImgButt().isClickable = true
+        }
+    }
 }

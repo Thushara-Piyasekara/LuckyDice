@@ -1,8 +1,6 @@
 package com.example.dicegame_cw1
 
-import android.widget.TextView
-
-open class Player(private val diceList: List<Dice>, private val counter: TextView) {
+open class Player(private val diceList: List<Dice>) {
     private var numOfWins: Int = 0
     private var totalScore: Int = 0
     protected var rollScore: Int = 0
@@ -18,10 +16,9 @@ open class Player(private val diceList: List<Dice>, private val counter: TextVie
         reRollCount++
     }
 
-    fun updateScore() {
+    fun updateScoreAndResetRerollCount() {
         reRollCount = 0
         totalScore += rollScore
-        counter.text = totalScore.toString()
     }
 
 
@@ -35,6 +32,9 @@ open class Player(private val diceList: List<Dice>, private val counter: TextVie
 
     fun getRerollCount(): Int {
         return reRollCount
+    }
+    fun getWinCount(): Int {
+        return numOfWins
     }
 
 }
