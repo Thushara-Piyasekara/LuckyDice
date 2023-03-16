@@ -2,8 +2,7 @@ package com.example.dicegame_cw1
 
 import android.os.Handler
 import android.os.Looper
-import android.widget.TextView
-import java.util.*
+
 
 /**
  * Class to hold the random Strategy for the computer player
@@ -40,14 +39,12 @@ open class DumbComputer(
     }
 
     private fun makeReRollDecision(): Boolean {
-        val random = Random()
-        return random.nextBoolean()
+        return listOf(true, false).random()
 //        return true
     }
 
     private fun pickDicesToRoll(): List<Dice> {
-        val random = Random()
-        val numberOfDices = random.nextInt(5)
+        val numberOfDices = (0..5).random()
         return dices.shuffled().take(numberOfDices)
     }
 

@@ -1,7 +1,8 @@
 package com.example.dicegame_cw1
 
 
-class HumanPlayer(private val diceList: List<Dice>, private val activity: GameScreen) : Player(diceList) {
+class HumanPlayer(private val diceList: List<Dice>, private val activity: GameScreen) :
+    Player(diceList) {
     init {
         this.setDiceOnClickListener()
     }

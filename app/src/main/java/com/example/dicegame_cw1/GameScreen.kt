@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.PopupWindow
 import android.widget.TextView
 
+
 class GameScreen : AppCompatActivity() {
     private lateinit var humanPlayer: HumanPlayer
     private lateinit var computerPlayer: DumbComputer
@@ -79,7 +80,6 @@ class GameScreen : AppCompatActivity() {
         }, 500)
     }
 
-
     fun updateScoreAndEnableButtons() {
         humanPlayer.updateScoreAndResetRerollCount()
         computerPlayer.updateScoreAndResetRerollCount()
@@ -101,6 +101,7 @@ class GameScreen : AppCompatActivity() {
         } else if (computerPlayer.getScore() > winScore && computerPlayer.getScore() > humanPlayer.getScore()) {
             computerPlayer.addWin()
             throwButton.isEnabled = false
+            showLosePopUp()
         }
         winCounterBoard.text =
             "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
@@ -137,5 +138,6 @@ class GameScreen : AppCompatActivity() {
         }
         popupWindow.showAtLocation(findViewById(R.id.c_dice3), Gravity.CENTER, 0, 0)
     }
+
 
 }

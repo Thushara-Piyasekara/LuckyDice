@@ -6,10 +6,14 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    private var winScore: Int = 50
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_menu)
@@ -45,6 +49,13 @@ class MainActivity : AppCompatActivity() {
             popupWindow.dismiss()
         }
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+    }
+
+    private fun updateWinScore() {
+        val winCountEditText = findViewById<EditText>(R.id.winCountEdit)
+        if (winCountEditText.text.isNotBlank()) {
+        }
+
     }
 
 

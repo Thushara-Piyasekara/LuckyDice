@@ -25,23 +25,25 @@
 
     <Button
             android:text="@string/new_game"
-            android:layout_width="132dp"
-            android:layout_height="0dp"
+            android:layout_width="214dp"
+            android:layout_height="125dp"
             android:id="@+id/newGameButt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
+            android:textSize="30sp"
             app:layout_constraintTop_toBottomOf="@+id/introText"
             android:layout_marginBottom="28dp"
             app:layout_constraintBottom_toTopOf="@+id/aboutButt" />
 
     <Button
             android:text="@string/about"
-            android:layout_width="132dp"
-            android:layout_height="0dp"
+            android:layout_width="214dp"
+            android:layout_height="125dp"
             android:id="@+id/aboutButt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="30sp"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newGameButt"
@@ -52,11 +54,34 @@
             android:layout_height="49dp"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editTextNumber"
+            android:id="@+id/winCountEdit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="216dp"
-            android:importantForAutofill="no" />
+            android:layout_marginBottom="192dp"
+            android:importantForAutofill="no"
+            app:layout_constraintHorizontal_bias="0.491" />
+
+    <Button
+            android:text="@string/set_win_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/winCountButton"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="120dp" />
+
+    <Switch
+            android:text="Optmise Strategy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/switch1"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="60dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

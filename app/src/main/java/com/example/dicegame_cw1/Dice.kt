@@ -11,6 +11,7 @@ import kotlin.random.Random
  * Represents a Dice in the application
  *
  * @property imageButt ImageButton connected to the Dice
+ *
  */
 class Dice(private val imageButt: ImageButton) {
     private var numOfSides: Int = 6
@@ -34,14 +35,14 @@ class Dice(private val imageButt: ImageButton) {
     fun roll() {
         resetDiceBackground()
         if (!clicked) {
-            val rotateAnim =
-                AnimationUtils.loadAnimation(this.imageButt.context, R.anim.rotate_anim)
-            this.imageButt.startAnimation(rotateAnim)
+                val rotateAnim =
+                    AnimationUtils.loadAnimation(this.imageButt.context, R.anim.rotate_anim)
+                this.imageButt.startAnimation(rotateAnim)
 
-            headVal = Random.nextInt(1, numOfSides + 1)
-            Handler(Looper.getMainLooper()).postDelayed({
-                this.imageButt.setImageResource(diceImagesArr[headVal - 1])
-            }, 500)
+                headVal = Random.nextInt(1, numOfSides + 1)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    this.imageButt.setImageResource(diceImagesArr[headVal - 1])
+                }, 500)
         } else {
             clicked = false
         }
