@@ -4,12 +4,13 @@ import android.os.Handler
 import android.os.Looper
 
 
+
 /**
  * Class to hold the random Strategy for the computer player
- *@author Thushara Piyasekara
+ * @author Thushara Piyasekara
  *
  * @property dices is the List of dice objects allocated to the computer player
- *
+ * @property activity
  */
 open class DumbComputer(
     private val dices: List<Dice>,
@@ -38,13 +39,12 @@ open class DumbComputer(
         }
     }
 
-    private fun makeReRollDecision(): Boolean {
+    protected open fun makeReRollDecision(): Boolean {
         return listOf(true, false).random()
-//        return true
     }
 
-    private fun pickDicesToRoll(): List<Dice> {
-        val numberOfDices = (0..5).random()
+    protected open fun pickDicesToRoll(): List<Dice> {
+        val numberOfDices = (0..4).random()
         return dices.shuffled().take(numberOfDices)
     }
 

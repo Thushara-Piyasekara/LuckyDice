@@ -18,6 +18,7 @@ class Dice(private val imageButt: ImageButton) {
     private var headVal: Int = 0
     private var clicked: Boolean = false
 
+    //Array for saving all the dice images
     private val diceImagesArr = listOf(
         R.drawable.dice_1,
         R.drawable.dice_2,
@@ -27,11 +28,11 @@ class Dice(private val imageButt: ImageButton) {
         R.drawable.dice_6
     )
 
-    init {
-        this.imageButt.setImageResource(R.drawable.dice_1)
-    }
 
-    //Rotates the dice and assigns a random number between 1-6
+    /**
+     * Checks if the Dice image button is clicked, if not clicked,
+     * Rotates the dice and assigns a random number between 1-6
+     */
     fun roll() {
         resetDiceBackground()
         if (!clicked) {
@@ -72,5 +73,14 @@ class Dice(private val imageButt: ImageButton) {
     //Returns the head value of the Dice object
     fun getHeadVal(): Int {
         return headVal
+    }
+
+    fun getClicked():Boolean {
+        return clicked
+    }
+
+    fun restoreDice(value: Int) {
+        headVal = value
+        imageButt.setImageResource(diceImagesArr[value-1])
     }
 }

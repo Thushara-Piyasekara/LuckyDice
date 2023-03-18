@@ -11,7 +11,7 @@ import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private var winScore: Int = 50
+    private var winScore: Int = 150
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         //Setting actionListener for "New Game" button
         val newGameButt = findViewById<Button>(R.id.newGameButt)
-
         newGameButt.setOnClickListener {
             val intent = Intent(this, GameScreen::class.java)
             startActivity(intent)
         }
+
     }
 
 
@@ -52,11 +52,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateWinScore() {
-        val winCountEditText = findViewById<EditText>(R.id.winCountEdit)
-        if (winCountEditText.text.isNotBlank()) {
+        val winScoreEditText = findViewById<EditText>(R.id.winScoreEdit)
+        if (winScoreEditText.text.isNotBlank()) {
+            winScore = winScoreEditText.text.toString().toInt()
         }
-
     }
-
-
 }
