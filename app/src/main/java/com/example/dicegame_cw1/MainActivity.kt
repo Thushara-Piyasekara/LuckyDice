@@ -14,11 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private var winScore: Int = 100
-
+    private var humanWins = 0
+    private var computerWins = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_menu)
+
+
+        humanWins = intent.getIntExtra("humanWins", 0)
+        computerWins = intent.getIntExtra("computerWins", 0)
+
 
         //Setting actionListener for win count change button
         val editWinCountButton = findViewById<Button>(R.id.editWinCountButton)
@@ -44,10 +50,13 @@ class MainActivity : AppCompatActivity() {
             val gameIntent = Intent(this, GameScreen::class.java)
             gameIntent.putExtra("winScore",winScore)
             gameIntent.putExtra("optimiseStrategy",optimiseStrategy)
+            gameIntent.putExtra("humanWins",humanWins)
+            gameIntent.putExtra("computerWins",computerWins)
             startActivity(gameIntent)
         }
-
     }
+
+
 
     //Makes the ABOUT popup window visible
     private fun showAboutPopUp(view: View) {

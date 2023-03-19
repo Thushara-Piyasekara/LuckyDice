@@ -47,7 +47,6 @@ open class Player(private var dices: List<Dice>) {
         }
     }
 
-
     fun restoreWinCount(wins: Int) {
         numOfWins = wins
     }
@@ -56,4 +55,7 @@ open class Player(private var dices: List<Dice>) {
         totalScore = score
     }
 
+    fun setWinCount(winCount: Int) {
+        numOfWins = winCount
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.dicegame_cw1
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -28,7 +29,6 @@ class GameScreen : AppCompatActivity() {
         winScore = gameIntent.getIntExtra("winScore",100)
         val optimiseStrategy = gameIntent.getBooleanExtra("optimiseStrategy",false)
 
-
         //Dices for Human Player
         val dice1 = Dice(findViewById(R.id.h_dice1))
         val dice2 = Dice(findViewById(R.id.h_dice2))
@@ -54,6 +54,7 @@ class GameScreen : AppCompatActivity() {
             SmartComputer(computerDices, this)
         }else
             DumbComputer(computerDices, this)
+        updateWinCounts(gameIntent)
 
         throwButton = findViewById(R.id.throwButt)
         scoreButton = findViewById(R.id.scoreButt)
@@ -231,5 +232,18 @@ class GameScreen : AppCompatActivity() {
             throwButton.isEnabled = true
             scoreButton.isEnabled = true
         }
+    }
+    override fun onBackPressed() {
+        val backIntent = Intent(this, MainActivity::class.java)
+        backIntent.putExtra("humanWins", humanPlayer.getWinCount())
+        backIntent.putExtra("computerWins", computerPlayer.getWinCount())
+        startActivity(backIntent)
+        finish()
+    }
+
+    fun updateWinCounts(intent : Intent) {
+        humanPlayer.setWinCount(intent.getIntExtra("humanWins",33))
+        computerPlayer.setWinCount(intent.getIntExtra("computerWins",0))
+        winCounterBoard.text = "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
     }
 }
