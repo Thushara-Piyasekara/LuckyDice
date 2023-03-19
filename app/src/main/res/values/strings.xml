@@ -12,4 +12,6 @@
     <string name="author">Thushara Piyasekara - (w1899372)</string>
     <string name="set_win_count">Set Win Count</string>
     <string name="default_win_score">Current Win Score : 101</string>
+    <string name="you_win">You Win!</string>
+    <string name="congratulations">Congratulations! :)</string>
 </resources>
