@@ -6,7 +6,6 @@ import android.os.Looper
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import kotlin.random.Random
-
 /**
  * Represents a Dice in the application
  *

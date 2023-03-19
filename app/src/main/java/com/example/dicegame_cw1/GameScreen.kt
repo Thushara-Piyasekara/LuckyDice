@@ -1,5 +1,6 @@
 package com.example.dicegame_cw1
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +24,11 @@ class GameScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
 
+        val gameIntent = intent
+        winScore = gameIntent.getIntExtra("winScore",100)
+        val optimiseStrategy = gameIntent.getBooleanExtra("optimiseStrategy",false)
+
+
         //Dices for Human Player
         val dice1 = Dice(findViewById(R.id.h_dice1))
         val dice2 = Dice(findViewById(R.id.h_dice2))
@@ -42,8 +48,12 @@ class GameScreen : AppCompatActivity() {
         val dice10 = Dice(findViewById(R.id.c_dice5))
 
         val computerDices = listOf(dice6, dice7, dice8, dice9, dice10)
-        computerPlayer = DumbComputer(computerDices, this)
 
+        //ComputerPlayer initialisation
+        computerPlayer = if (optimiseStrategy) {
+            SmartComputer(computerDices, this)
+        }else
+            DumbComputer(computerDices, this)
 
         throwButton = findViewById(R.id.throwButt)
         scoreButton = findViewById(R.id.scoreButt)
@@ -86,6 +96,15 @@ class GameScreen : AppCompatActivity() {
         throwButton.isEnabled = true
         checkWinner()
         humanPlayer.disableDiceSelection()
+    }
+
+//    fun changeUIBackground() {
+//        val gameBackground = findViewById<View>(R.id.gameScreen)
+//        gameBackground.setBackgroundColor(Color.RED)
+//    }
+
+    fun getHumanScore(): Int {
+        return humanPlayer.getScore()
     }
 
     fun getScoreButton(): Button {
@@ -145,16 +164,18 @@ class GameScreen : AppCompatActivity() {
         outState.putInt("human_wins", humanPlayer.getWinCount())
         outState.putInt("computer_wins", computerPlayer.getWinCount())
 
-        //Number of rerolls taken by each player
+        //Number of rerolls taken by human player
         outState.putInt("human_reroll_count", humanPlayer.getRerollCount())
-//        outState.putInt("human_reroll_count", humanPlayer.getRerollCount())
 
         //Values of the dices of each player
         outState.putIntegerArrayList("human_dice_values", humanPlayer.getDiceValueList())
         outState.putIntegerArrayList("computer_dice_values", computerPlayer.getDiceValueList())
 
-        //Whether the buttons were enabled or disabled
+        //Whether the dices were clicked or not by the user
         outState.putIntegerArrayList("dice_clicked_state", humanPlayer.getClickedStates())
+
+        //Whether the buttons were enabled or disabled
+
 
         super.onSaveInstanceState(outState)
     }
@@ -168,9 +189,10 @@ class GameScreen : AppCompatActivity() {
         val savedComputerWins = savedInstanceState.getInt("computer_wins")
         restoreScoresAndWins(savedHumanScore, savedComputerScore, savedHumanWins, savedComputerWins)
 
-        //Restore reroll counts for both players
+        //Restore reroll count
         val humanRerollCount = savedInstanceState.getInt("human_reroll_count")
-        humanPlayer.restoreRerollCount(humanRerollCount)
+        humanPlayer.setRerollCount(humanRerollCount)
+        restoreGameButtons(humanRerollCount)
 
         //Restore Dice values of each player
         val humanDiceValues = savedInstanceState.getIntegerArrayList("human_dice_values")
@@ -198,6 +220,7 @@ class GameScreen : AppCompatActivity() {
         winCounterBoard.text = "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
         humanPlayer.restoreWinCount(savedHumanWins)
         computerPlayer.restoreWinCount(savedComputerWins)
+        checkWinner()
     }
 
     fun restoreGameButtons(rerolls: Int) {

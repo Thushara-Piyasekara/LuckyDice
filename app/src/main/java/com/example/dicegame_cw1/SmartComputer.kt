@@ -1,6 +1,7 @@
 package com.example.dicegame_cw1
 
-import java.util.concurrent.locks.Condition
+import android.os.Handler
+import android.os.Looper
 
 class SmartComputer(
     private val dices: List<Dice>,
@@ -15,7 +16,29 @@ class SmartComputer(
     private val minRollScore = minDiceValue * numOfDices
     private val averageRollScore = ((maxDiceValue + minDiceValue) / 2) * numOfDices // 17.5
 
-    fun makeReRollDecision(humanScore: Int): Boolean {
+
+
+    override fun play() {
+        val humanScore = activity.getHumanScore()
+        if (makeReRollDecision()) {
+            throwDices(pickDicesToRoll(humanScore))
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (makeReRollDecision()) {
+                    throwDices(pickDicesToRoll(humanScore))
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        activity.updateScoreAndEnableButtons()
+                    }, 1000)
+                } else {
+                    activity.updateScoreAndEnableButtons()
+                }
+            }, 1000)
+        } else {
+            activity.updateScoreAndEnableButtons()
+        }
+
+    }
+
+    override fun makeReRollDecision(): Boolean {
         return (this.rollScore != maxRollScore)
     }
 

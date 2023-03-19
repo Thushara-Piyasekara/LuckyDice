@@ -58,9 +58,7 @@ class HumanPlayer(private val dices: List<Dice>, private val activity: GameScree
         }
     }
 
-    override fun restoreRerollCount(savedCount: Int) {
-        activity.restoreGameButtons(savedCount)
-
+    fun setRerollCount(savedCount: Int) {
+        reRollCount = savedCount
     }
-
 }

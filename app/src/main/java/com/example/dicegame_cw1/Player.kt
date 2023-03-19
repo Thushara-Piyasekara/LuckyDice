@@ -6,7 +6,6 @@ open class Player(private var dices: List<Dice>) {
     protected var rollScore: Int = 0
     protected var reRollCount: Int = 0
 
-
     open fun throwDices() {
         rollScore = 0
         for (dice in dices) {
@@ -48,9 +47,6 @@ open class Player(private var dices: List<Dice>) {
         }
     }
 
-    open fun restoreRerollCount(savedCount: Int) {
-        reRollCount = savedCount
-    }
 
     fun restoreWinCount(wins: Int) {
         numOfWins = wins

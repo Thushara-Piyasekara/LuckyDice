@@ -3,8 +3,6 @@ package com.example.dicegame_cw1
 import android.os.Handler
 import android.os.Looper
 
-
-
 /**
  * Class to hold the random Strategy for the computer player
  * @author Thushara Piyasekara
@@ -21,7 +19,7 @@ open class DumbComputer(
      * Makes a decision to re roll and picks Dices to keep from re rolling upto two times
      *
      */
-    fun play() {
+    open fun play() {
         if (makeReRollDecision()) {
             throwDices(pickDicesToRoll())
             Handler(Looper.getMainLooper()).postDelayed({
@@ -39,16 +37,16 @@ open class DumbComputer(
         }
     }
 
-    protected open fun makeReRollDecision(): Boolean {
+    open fun makeReRollDecision(): Boolean {
         return listOf(true, false).random()
     }
 
-    protected open fun pickDicesToRoll(): List<Dice> {
+    private fun pickDicesToRoll(): List<Dice> {
         val numberOfDices = (0..4).random()
         return dices.shuffled().take(numberOfDices)
     }
 
-    private fun throwDices(dicesToRoll: List<Dice>) {
+    protected fun throwDices(dicesToRoll: List<Dice>) {
         rollScore = 0
         for (dice in dicesToRoll) {
             dice.roll()

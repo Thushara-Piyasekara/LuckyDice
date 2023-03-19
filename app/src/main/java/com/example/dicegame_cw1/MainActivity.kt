@@ -8,15 +8,29 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.PopupWindow
+import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private var winScore: Int = 150
+    private var winScore: Int = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_menu)
+
+        //Setting actionListener for win count change button
+        val editWinCountButton = findViewById<Button>(R.id.editWinCountButton)
+        editWinCountButton.setOnClickListener {
+            updateWinScore()
+        }
+        //Setting actionListener for optimise switch
+        val optimiseSwitch = findViewById<Switch>(R.id.optimiseSwitch)
+        var optimiseStrategy = false
+        optimiseSwitch.setOnCheckedChangeListener{ _,isClicked ->
+            optimiseStrategy = isClicked
+        }
 
         //Setting actionListener for "About" button
         val aboutButt = findViewById<Button>(R.id.aboutButt)
@@ -27,12 +41,13 @@ class MainActivity : AppCompatActivity() {
         //Setting actionListener for "New Game" button
         val newGameButt = findViewById<Button>(R.id.newGameButt)
         newGameButt.setOnClickListener {
-            val intent = Intent(this, GameScreen::class.java)
-            startActivity(intent)
+            val gameIntent = Intent(this, GameScreen::class.java)
+            gameIntent.putExtra("winScore",winScore)
+            gameIntent.putExtra("optimiseStrategy",optimiseStrategy)
+            startActivity(gameIntent)
         }
 
     }
-
 
     //Makes the ABOUT popup window visible
     private fun showAboutPopUp(view: View) {
@@ -55,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         val winScoreEditText = findViewById<EditText>(R.id.winScoreEdit)
         if (winScoreEditText.text.isNotBlank()) {
             winScore = winScoreEditText.text.toString().toInt()
+            val winScoreTextView = findViewById<TextView>(R.id.currentWinScore)
+            winScoreTextView.text = "Current Win Score : $winScore"
         }
     }
 }
