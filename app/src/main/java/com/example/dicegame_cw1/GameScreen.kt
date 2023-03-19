@@ -1,6 +1,5 @@
 package com.example.dicegame_cw1
 
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,15 +18,15 @@ class GameScreen : AppCompatActivity() {
     private lateinit var scoreButton: Button
     private lateinit var scoreBoard: TextView
     private lateinit var winCounterBoard: TextView
-    private var winScore: Int = 100
+    private var winScore: Int = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
 
         val gameIntent = intent
-        winScore = gameIntent.getIntExtra("winScore",100)
-        val optimiseStrategy = gameIntent.getBooleanExtra("optimiseStrategy",false)
+        winScore = gameIntent.getIntExtra("winScore", 101)
+        val optimiseStrategy = gameIntent.getBooleanExtra("optimiseStrategy", false)
 
         //Dices for Human Player
         val dice1 = Dice(findViewById(R.id.h_dice1))
@@ -52,9 +51,8 @@ class GameScreen : AppCompatActivity() {
         //ComputerPlayer initialisation
         computerPlayer = if (optimiseStrategy) {
             SmartComputer(computerDices, this)
-        }else
+        } else
             DumbComputer(computerDices, this)
-        updateWinCounts(gameIntent)
 
         throwButton = findViewById(R.id.throwButt)
         scoreButton = findViewById(R.id.scoreButt)
@@ -62,6 +60,7 @@ class GameScreen : AppCompatActivity() {
 
         scoreBoard = findViewById(R.id.scoreBoard)
         winCounterBoard = findViewById(R.id.winCount)
+        updateWinCounts(gameIntent)
 
         throwButton.setOnClickListener {
             if (humanPlayer.getRerollCount() == 0) {
@@ -71,12 +70,12 @@ class GameScreen : AppCompatActivity() {
                     scoreButton.isEnabled = true
                     humanPlayer.enableDiceSelection()
                 }, 1000)
-
             } else {
                 humanPlayer.reRoll()
             }
         }
         scoreButton.setOnClickListener {
+            humanPlayer.clearDiceSelection()
             startComputerAction()
         }
     }
@@ -99,11 +98,6 @@ class GameScreen : AppCompatActivity() {
         humanPlayer.disableDiceSelection()
     }
 
-//    fun changeUIBackground() {
-//        val gameBackground = findViewById<View>(R.id.gameScreen)
-//        gameBackground.setBackgroundColor(Color.RED)
-//    }
-
     fun getHumanScore(): Int {
         return humanPlayer.getScore()
     }
@@ -113,14 +107,23 @@ class GameScreen : AppCompatActivity() {
     }
 
     private fun checkWinner() {
-        if (humanPlayer.getScore() > winScore && humanPlayer.getScore() > computerPlayer.getScore()) {
+        if (humanPlayer.getScore() >= winScore && humanPlayer.getScore() > computerPlayer.getScore()) {
             humanPlayer.addWin()
             showWinPopUp()
             throwButton.isEnabled = false
-        } else if (computerPlayer.getScore() > winScore && computerPlayer.getScore() > humanPlayer.getScore()) {
+        } else if (computerPlayer.getScore() >= winScore && computerPlayer.getScore() > humanPlayer.getScore()) {
             computerPlayer.addWin()
             throwButton.isEnabled = false
             showLosePopUp()
+        } else if (humanPlayer.getScore() >= winScore && computerPlayer.getScore() == humanPlayer.getScore()){
+            throwButton.setOnClickListener {
+                humanPlayer.throwDices()
+                computerPlayer.throwDices()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    checkWinner()
+                }, 1002)
+
+            }
         }
         winCounterBoard.text =
             "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
@@ -176,7 +179,8 @@ class GameScreen : AppCompatActivity() {
         outState.putIntegerArrayList("dice_clicked_state", humanPlayer.getClickedStates())
 
         //Whether the buttons were enabled or disabled
-
+        outState.putBoolean("throw_button",throwButton.isEnabled)
+        outState.putBoolean("score_button",scoreButton.isEnabled)
 
         super.onSaveInstanceState(outState)
     }
@@ -193,7 +197,7 @@ class GameScreen : AppCompatActivity() {
         //Restore reroll count
         val humanRerollCount = savedInstanceState.getInt("human_reroll_count")
         humanPlayer.setRerollCount(humanRerollCount)
-        restoreGameButtons(humanRerollCount)
+//        restoreGameButtons(humanRerollCount)
 
         //Restore Dice values of each player
         val humanDiceValues = savedInstanceState.getIntegerArrayList("human_dice_values")
@@ -204,7 +208,10 @@ class GameScreen : AppCompatActivity() {
         //Restore Clicked State of each dice
         val humanDiceClickState = savedInstanceState.getIntegerArrayList("dice_clicked_state")
         humanPlayer.restoreClickState(humanDiceClickState as ArrayList<Int>)
-        
+
+        //Restore game buttons isEnabled
+        throwButton.isEnabled = savedInstanceState.getBoolean("throw_button")
+        scoreButton.isEnabled = savedInstanceState.getBoolean("score_button")
 
         super.onRestoreInstanceState(savedInstanceState)
     }
@@ -218,21 +225,13 @@ class GameScreen : AppCompatActivity() {
         scoreBoard.text = "$savedHumanScore / $savedComputerScore"
         humanPlayer.restoreScore(savedHumanScore)
         computerPlayer.restoreScore(savedComputerScore)
-        winCounterBoard.text = "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
+        winCounterBoard.text =
+            "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
         humanPlayer.restoreWinCount(savedHumanWins)
         computerPlayer.restoreWinCount(savedComputerWins)
-        checkWinner()
     }
 
-    fun restoreGameButtons(rerolls: Int) {
-        if (rerolls == 0) {
-            throwButton.isEnabled = true
-            scoreButton.isEnabled = false
-        } else {
-            throwButton.isEnabled = true
-            scoreButton.isEnabled = true
-        }
-    }
+
     override fun onBackPressed() {
         val backIntent = Intent(this, MainActivity::class.java)
         backIntent.putExtra("humanWins", humanPlayer.getWinCount())
@@ -241,9 +240,10 @@ class GameScreen : AppCompatActivity() {
         finish()
     }
 
-    fun updateWinCounts(intent : Intent) {
-        humanPlayer.setWinCount(intent.getIntExtra("humanWins",33))
-        computerPlayer.setWinCount(intent.getIntExtra("computerWins",0))
-        winCounterBoard.text = "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
+    fun updateWinCounts(intent: Intent) {
+        humanPlayer.setWinCount(intent.getIntExtra("humanWins", 33))
+        computerPlayer.setWinCount(intent.getIntExtra("computerWins", 0))
+        winCounterBoard.text =
+            "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
     }
 }

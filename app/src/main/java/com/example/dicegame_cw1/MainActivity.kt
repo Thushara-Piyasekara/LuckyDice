@@ -13,15 +13,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private var winScore: Int = 100
+    private var winScore: Int = 101
     private var humanWins = 0
     private var computerWins = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_menu)
-
-
+        // Getting Extras from game activity
         humanWins = intent.getIntExtra("humanWins", 0)
         computerWins = intent.getIntExtra("computerWins", 0)
 
@@ -31,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         editWinCountButton.setOnClickListener {
             updateWinScore()
         }
+
         //Setting actionListener for optimise switch
         val optimiseSwitch = findViewById<Switch>(R.id.optimiseSwitch)
         var optimiseStrategy = false
@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     //Makes the ABOUT popup window visible
     private fun showAboutPopUp(view: View) {
         val aboutPopup = layoutInflater.inflate(R.layout.about_popup_layout, null)
@@ -75,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
     }
 
+    // Update the Win Threshold for the next game.
     private fun updateWinScore() {
         val winScoreEditText = findViewById<EditText>(R.id.winScoreEdit)
         if (winScoreEditText.text.isNotBlank()) {
@@ -83,4 +82,15 @@ class MainActivity : AppCompatActivity() {
             winScoreTextView.text = "Current Win Score : $winScore"
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("winScore", winScore)
+        super.onSaveInstanceState(outState)
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        winScore = savedInstanceState.getInt("winScore")
+        val winScoreTextView = findViewById<TextView>(R.id.currentWinScore)
+        winScoreTextView.text = "Current Win Score : $winScore"
+    }
+
 }

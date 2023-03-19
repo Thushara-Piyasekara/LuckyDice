@@ -23,12 +23,15 @@ open class Player(private var dices: List<Dice>) {
     fun getScore(): Int {
         return this.totalScore
     }
+
     fun getRerollCount(): Int {
         return reRollCount
     }
+
     fun addWin() {
         numOfWins++
     }
+
     fun getWinCount(): Int {
         return numOfWins
     }
@@ -36,7 +39,11 @@ open class Player(private var dices: List<Dice>) {
     fun getDiceValueList(): ArrayList<Int> {
         val diceValues = arrayListOf<Int>()
         for (dice in dices) {
-            diceValues.add(dice.getHeadVal())
+            if (dice.getHeadVal() == 0) {
+                diceValues.add(1)
+            } else {
+                diceValues.add(dice.getHeadVal())
+            }
         }
         return diceValues
     }

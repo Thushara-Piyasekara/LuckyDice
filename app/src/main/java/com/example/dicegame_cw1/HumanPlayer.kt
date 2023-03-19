@@ -61,4 +61,12 @@ class HumanPlayer(private val dices: List<Dice>, private val activity: GameScree
     fun setRerollCount(savedCount: Int) {
         reRollCount = savedCount
     }
+
+    fun clearDiceSelection() {
+        for (dice in dices) {
+            if (dice.getClicked()) {
+                dice.toggleDiceLock()
+            }
+        }
+    }
 }
