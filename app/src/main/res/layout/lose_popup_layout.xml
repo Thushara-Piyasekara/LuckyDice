@@ -35,6 +35,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:layout_height="wrap_content"
                 android:id="@+id/CongratsTextView"
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="20dp"
@@ -46,6 +47,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/popupClose"
+                android:textStyle="bold"
+                android:typeface="sans"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_marginTop="20dp" />
     </LinearLayout>
 

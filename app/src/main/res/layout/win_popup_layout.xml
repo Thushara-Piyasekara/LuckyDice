@@ -19,12 +19,12 @@
 
         <TextView
                 android:text="@string/you_win"
-                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/winMsgTextView"
                 android:textColor="#37FF00"
                 android:textSize="80sp"
+                android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
                 android:typeface="sans"
                 android:layout_marginTop="4dp" />
@@ -36,6 +36,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:id="@+id/CongratsTextView"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/purple_200"
@@ -45,6 +46,8 @@
                 android:text="@string/ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:typeface="sans"
                 android:fontFamily="sans-serif-condensed"
                 android:id="@+id/popupClose"
                 android:layout_marginTop="20dp" />

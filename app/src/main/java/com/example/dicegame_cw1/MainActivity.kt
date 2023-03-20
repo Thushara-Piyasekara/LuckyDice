@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_menu)
+
+        title = "Welcome to Lucky Dice"
         // Getting Extras from game activity
         humanWins = intent.getIntExtra("humanWins", 0)
         computerWins = intent.getIntExtra("computerWins", 0)

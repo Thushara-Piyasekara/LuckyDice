@@ -9,5 +9,7 @@
         <item name="background">@android:color/transparent</item>
         <item name="android:cropToPadding">false</item>
     </style>
+
+    
 </resources>
 

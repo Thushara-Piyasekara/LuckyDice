@@ -23,6 +23,7 @@ class GameScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
+        title = "Lucky Dice"
 
         val gameIntent = intent
         winScore = gameIntent.getIntExtra("winScore", 101)
@@ -62,6 +63,7 @@ class GameScreen : AppCompatActivity() {
         winCounterBoard = findViewById(R.id.winCount)
         updateWinCounts(gameIntent)
 
+        //Throw button OnClickListener
         throwButton.setOnClickListener {
             if (humanPlayer.getRerollCount() == 0) {
                 humanPlayer.throwDices()
@@ -74,6 +76,7 @@ class GameScreen : AppCompatActivity() {
                 humanPlayer.reRoll()
             }
         }
+        //Score button OnClickListener
         scoreButton.setOnClickListener {
             humanPlayer.clearDiceSelection()
             startComputerAction()
