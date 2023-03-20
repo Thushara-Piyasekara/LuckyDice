@@ -10,7 +10,6 @@ import kotlin.random.Random
  * Represents a Dice in the application
  *
  * @property imageButt ImageButton connected to the Dice
- *
  */
 class Dice(private val imageButt: ImageButton) {
     private var numOfSides: Int = 6
@@ -31,6 +30,16 @@ class Dice(private val imageButt: ImageButton) {
     /**
      * Checks if the Dice image button is clicked, if not clicked,
      * Rotates the dice and assigns a random number between 1-6
+     *
+     * used to delay the action of computer in order to make it visible for the user
+     * reference 1 :- https://stackoverflow.com/questions/3072173/how-to-call-a-method-after-a-delay-in-android
+     * used the,
+     *           Handler(Looper.getMainLooper()).postDelayed({
+                      //CODE TO RUN
+                 }, 500)
+     * part from the original code
+     * reference 2 :- https://developer.android.com/reference/android/os/Handler
+     * Learned about the functionality of Handler Class
      */
     fun roll() {
         resetDiceBackground()
@@ -40,6 +49,7 @@ class Dice(private val imageButt: ImageButton) {
                 this.imageButt.startAnimation(rotateAnim)
 
                 headVal = Random.nextInt(1, numOfSides + 1)
+//                headVal = 6
                 Handler(Looper.getMainLooper()).postDelayed({
                     this.imageButt.setImageResource(diceImagesArr[headVal - 1])
                 }, 500)

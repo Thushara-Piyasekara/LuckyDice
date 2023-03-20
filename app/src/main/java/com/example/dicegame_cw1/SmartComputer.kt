@@ -36,7 +36,7 @@
    2. High chance of sustaining the lead if computer gets a higher score than the human.
    3. Uses both re-rolls almost every time to utilise the maximum amount of moves
 
- ######### Advantages ##########
+ ######### Disadvantages ##########
    1. High chance of failure if computer loses the lead.
    2. If human gets the lead, computer will make high risk moves consecutively
 
@@ -48,6 +48,12 @@ package com.example.dicegame_cw1
 import android.os.Handler
 import android.os.Looper
 
+/**
+ * Class for the efficient strategy for Computer player
+ *
+ * @property dices Dice objects owned by the computer Player
+ * @property activity GameScreen activity used to call certain methods
+ */
 class SmartComputer(
     private val dices: List<Dice>,
     private val activity: GameScreen
@@ -60,6 +66,21 @@ class SmartComputer(
     private val maxRollScore = maxDiceValue * numOfDices
     private val minRollScore = minDiceValue * numOfDices
 
+    /**
+     * Decides whether to re roll in a strategic and efficient manner
+     * Decides which dices to re roll and rerolls them
+     * Updates the scores after the Re rolls are done
+     *
+     * reference 1 :- https://stackoverflow.com/questions/3072173/how-to-call-a-method-after-a-delay-in-android
+     * used the,
+     *         Handler(Looper.getMainLooper()).postDelayed({
+                    //CODE TO RUN
+                }, 500)
+     * part from the original code
+     * reference 2 :- https://developer.android.com/reference/android/os/Handler
+     * Learned about the functionality of Handler Class
+     *
+     */
     override fun play() {
         val humanScore = activity.getHumanScore()
         if (makeReRollDecision()) {
@@ -79,10 +100,23 @@ class SmartComputer(
         }
     }
 
+    /**
+     * Decides whether to reroll or not
+     * If even one dice is less than 6, decides to reroll
+     *
+     * @return boolean value for reRoll decision
+     */
     override fun makeReRollDecision(): Boolean {
         return (this.rollScore != maxRollScore)
     }
 
+    /**
+     * Picks Dices to reroll based on the difference between player scores and current values of the dices
+     * The 4 scenarios are explained above
+     *
+     * @param lastHumanScore Total Score of the human player upto last round
+     * @return Returns a list of dice objects which were chosen worthy to be reRolled
+     */
     fun pickDicesToRoll(lastHumanScore: Int): MutableList<Dice> {
         val lastRoundDifference = lastHumanScore - this.totalScore // last round's difference between the scores of human player and computer player
         val catchUpMax = lastRoundDifference + maxRollScore // Predicted max amount the computer should catch up
@@ -91,7 +125,7 @@ class SmartComputer(
         var dicesToReroll = mutableListOf<Dice>()
 
         // Safe - computer is ahead and human can't catch up
-        if (catchUpMax < 6) {
+        if (catchUpMax < maxDiceValue) {
             for (dice in dices) {
                 if (dice.getHeadVal() < maxDiceValue) {
                     dicesToReroll.add(dice)
@@ -118,7 +152,7 @@ class SmartComputer(
         }
         // Not safe - human has a higher score and computer can't catch up (worst case scenario)
         //  6 < this.rollScore < 30 < catchUpMax
-        else if (catchUpMin > 30) {
+        else if (catchUpMin > maxRollScore) {
             for (dice in dices) {
                 if (dice.getHeadVal() < maxDiceValue) { // Gambles for the future :)
                     dicesToReroll.add(dice)

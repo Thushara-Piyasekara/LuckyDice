@@ -16,8 +16,15 @@ open class DumbComputer(
 ) : Player(dices) {
 
     /**
-     * Makes a decision to re roll and picks Dices to keep from re rolling upto two times
-     *
+     * used to delay the action of computer in order to make it visible for the user
+     * reference 1 :- https://stackoverflow.com/questions/3072173/how-to-call-a-method-after-a-delay-in-android
+     * used the,
+     *         Handler(Looper.getMainLooper()).postDelayed({
+                  //CODE TO RUN
+               }, 500)
+     * part from the original code
+     * reference 2 :- https://developer.android.com/reference/android/os/Handler
+     * Learned about the functionality of Handler Class
      */
     open fun play() {
         if (makeReRollDecision()) {
@@ -37,15 +44,30 @@ open class DumbComputer(
         }
     }
 
+    /**
+     * Decides whether to reroll or not randomly
+     *
+     * @return boolean value for reRoll decision
+     */
     open fun makeReRollDecision(): Boolean {
         return listOf(true, false).random()
     }
 
+    /**
+     * pickes a random number of dices in a random order to re roll
+     *
+     * @return Returns a list of dice objects which were chosen worthy to be reRolled
+     */
     private fun pickDicesToRoll(): List<Dice> {
         val numberOfDices = (0..4).random()
         return dices.shuffled().take(numberOfDices)
     }
 
+    /**
+     * throws the given list of dices and updates the total score for that round
+     *
+     * @param dicesToRoll dices that should be rolled
+     */
     protected fun throwDices(dicesToRoll: List<Dice>) {
         rollScore = 0
         for (dice in dicesToRoll) {

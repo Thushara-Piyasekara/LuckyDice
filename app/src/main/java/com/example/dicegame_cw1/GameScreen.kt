@@ -73,6 +73,18 @@ class GameScreen : AppCompatActivity() {
             if (humanPlayer.getRerollCount() == 0) {
                 humanPlayer.throwDices()
                 computerPlayer.throwDices()
+                /**
+                 * used to delay the action of computer in order to make it visible for the user
+                 * reference 1 :- https://stackoverflow.com/questions/3072173/how-to-call-a-method-after-a-delay-in-android
+                 * used the,
+                 *         Handler(Looper.getMainLooper()).postDelayed({
+                //CODE TO RUN
+                }, 500)
+                 * part from the original code
+                 * reference 2 :- https://developer.android.com/reference/android/os/Handler
+                 * Learned about the functionality of Handler Class
+                 *
+                 */
                 Handler(Looper.getMainLooper()).postDelayed({
                     scoreButton.isEnabled = true
                     humanPlayer.enableDiceSelection()
@@ -99,7 +111,14 @@ class GameScreen : AppCompatActivity() {
         /**
          * used to delay the action of computer in order to make it visible for the user
          * reference 1 :- https://stackoverflow.com/questions/3072173/how-to-call-a-method-after-a-delay-in-android
+         * used the,
+         *         Handler(Looper.getMainLooper()).postDelayed({
+                        //CODE TO RUN
+                   }, 500)
+         * part from the original code
          * reference 2 :- https://developer.android.com/reference/android/os/Handler
+         * Learned about the functionality of Handler Class
+         *
          */
         Handler(Looper.getMainLooper()).postDelayed({
             computerPlayer.play()
@@ -107,8 +126,10 @@ class GameScreen : AppCompatActivity() {
     }
 
     /**
-     *
-     *
+     * This method is used after a round is over
+     * Updates the scores of both human and computer
+     * Enables the throw button and makes dices unclickable
+     * Checks the winner
      */
     fun updateScoreAndEnableButtons() {
         humanPlayer.updateScoreAndResetRerollCount()
@@ -127,6 +148,10 @@ class GameScreen : AppCompatActivity() {
         return scoreButton
     }
 
+    /**
+     * checks the winner of the game and updates the winner board
+     * In case of a tie, loops till a winner is chosen
+     */
     private fun checkWinner() {
         if (humanPlayer.getScore() >= winScore && humanPlayer.getScore() > computerPlayer.getScore()) {
             humanPlayer.addWin()
@@ -141,15 +166,23 @@ class GameScreen : AppCompatActivity() {
                 humanPlayer.throwDices()
                 computerPlayer.throwDices()
                 Handler(Looper.getMainLooper()).postDelayed({
+                    humanPlayer.updateScoreAndResetRerollCount()
+                    computerPlayer.updateScoreAndResetRerollCount()
+                    scoreBoard.text = "${humanPlayer.getScore()} / ${computerPlayer.getScore()}"
                     checkWinner()
                 }, 1002)
-
             }
         }
         winCounterBoard.text =
             "H: ${humanPlayer.getWinCount()} / C: ${computerPlayer.getWinCount()}"
     }
 
+    /**
+     * Displays win popup
+     * References :- https://johncodeos.com/how-to-create-a-popup-window-in-android-using-kotlin/
+     * Learned the mechanism to create a popup from reading the above article
+     * It was modified to suit this project and re used
+     */
     private fun showWinPopUp() {
         val aboutPopup = layoutInflater.inflate(R.layout.win_popup_layout, null)
         val popupWindow = PopupWindow(
@@ -166,6 +199,12 @@ class GameScreen : AppCompatActivity() {
         popupWindow.showAtLocation(findViewById(R.id.c_dice3), Gravity.CENTER, 0, 0)
     }
 
+    /**
+     * Displays win popup
+     * References :- https://johncodeos.com/how-to-create-a-popup-window-in-android-using-kotlin/
+     * Learned the mechanism to create a popup from reading the above article
+     * It was modified to suit this project and re used
+     */
     private fun showLosePopUp() {
         val aboutPopup = layoutInflater.inflate(R.layout.lose_popup_layout, null)
         val popupWindow = PopupWindow(
@@ -182,6 +221,9 @@ class GameScreen : AppCompatActivity() {
         popupWindow.showAtLocation(findViewById(R.id.c_dice3), Gravity.CENTER, 0, 0)
     }
 
+    /**
+     * Saves the data in case of a configuration change
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         //Number of Wins and Scores of both player
         outState.putInt("human_score", humanPlayer.getScore())
@@ -206,6 +248,9 @@ class GameScreen : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
+    /**
+     * Restores the data after a configuration change
+     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
 
         //Restore win and score counters
@@ -237,6 +282,11 @@ class GameScreen : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
     }
 
+    /**
+     * Updates the score board TextView, win counter TextView and Properties of Player objects with the given arguments
+     * Used after a configuration change to restore the Views
+     *
+     */
     private fun restoreScoresAndWins(
         savedHumanScore: Int,
         savedComputerScore: Int,
@@ -252,7 +302,10 @@ class GameScreen : AppCompatActivity() {
         computerPlayer.restoreWinCount(savedComputerWins)
     }
 
-
+    /**
+     * Passes the number of wins for each player through a intent to the previous activity
+     *
+     */
     override fun onBackPressed() {
         val backIntent = Intent(this, MainActivity::class.java)
         backIntent.putExtra("humanWins", humanPlayer.getWinCount())
@@ -261,6 +314,11 @@ class GameScreen : AppCompatActivity() {
         finish()
     }
 
+    /**
+     * updates the win counters using the Extras from previous activity
+     *
+     * @param intent intent from main activity
+     */
     fun updateWinCounts(intent: Intent) {
         humanPlayer.setWinCount(intent.getIntExtra("humanWins", 33))
         computerPlayer.setWinCount(intent.getIntExtra("computerWins", 0))
