@@ -11,20 +11,25 @@ import android.widget.Button
 import android.widget.PopupWindow
 import android.widget.TextView
 
+/**
+ * Responsible for implementing the game screen
+ *
+ */
 class GameScreen : AppCompatActivity() {
-    private lateinit var humanPlayer: HumanPlayer
-    private lateinit var computerPlayer: DumbComputer
+    private lateinit var humanPlayer: HumanPlayer //Human player object to save all the relevant information
+    private lateinit var computerPlayer: DumbComputer //Computer player object to save all the relevant information
     private lateinit var throwButton: Button
     private lateinit var scoreButton: Button
-    private lateinit var scoreBoard: TextView
-    private lateinit var winCounterBoard: TextView
-    private var winScore: Int = 101
+    private lateinit var scoreBoard: TextView //Score board with both players' scores
+    private lateinit var winCounterBoard: TextView //Win counter with both player' scores
+    private var winScore: Int = 101 //Win score that determines the win threshold
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
         title = "Lucky Dice"
 
+        // Retrieves data from the previous activity
         val gameIntent = intent
         winScore = gameIntent.getIntExtra("winScore", 101)
         val optimiseStrategy = gameIntent.getBooleanExtra("optimiseStrategy", false)
@@ -49,7 +54,7 @@ class GameScreen : AppCompatActivity() {
 
         val computerDices = listOf(dice6, dice7, dice8, dice9, dice10)
 
-        //ComputerPlayer initialisation
+        //ComputerPlayer initialisation based on optimisation choice
         computerPlayer = if (optimiseStrategy) {
             SmartComputer(computerDices, this)
         } else
@@ -57,11 +62,11 @@ class GameScreen : AppCompatActivity() {
 
         throwButton = findViewById(R.id.throwButt)
         scoreButton = findViewById(R.id.scoreButt)
-        scoreButton.isEnabled = false
+        scoreButton.isEnabled = false //Score button is initially disabled
 
         scoreBoard = findViewById(R.id.scoreBoard)
         winCounterBoard = findViewById(R.id.winCount)
-        updateWinCounts(gameIntent)
+        updateWinCounts(gameIntent) //updates the win counter from previous game's data
 
         //Throw button OnClickListener
         throwButton.setOnClickListener {
@@ -83,15 +88,28 @@ class GameScreen : AppCompatActivity() {
         }
     }
 
+    /**
+     * Method responsible for rerolls of the computer
+     *
+     */
     fun startComputerAction() {
         throwButton.isEnabled = false
         scoreButton.isEnabled = false
 
+        /**
+         * used to delay the action of computer in order to make it visible for the user
+         * reference 1 :- https://stackoverflow.com/questions/3072173/how-to-call-a-method-after-a-delay-in-android
+         * reference 2 :- https://developer.android.com/reference/android/os/Handler
+         */
         Handler(Looper.getMainLooper()).postDelayed({
             computerPlayer.play()
         }, 500)
     }
 
+    /**
+     *
+     *
+     */
     fun updateScoreAndEnableButtons() {
         humanPlayer.updateScoreAndResetRerollCount()
         computerPlayer.updateScoreAndResetRerollCount()

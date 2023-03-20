@@ -8,29 +8,21 @@
         tools:context=".GameScreen">
 
 
-    <!--ButtonView for the Score button-->
-
-    <!--ButtonView for the Throw button-->
-
-
-    <!--TextView for the score of the computer player-->
-
-    <!--TextView for the score of the human player-->
-
-    <!--LinearLayout containing the ImageButtons(Dices) of Computer player-->
-
-    <!--LinearLayout containing the ImageButtons(Dices) of human player-->
-
     <Button
             android:text="@string/score"
             android:layout_width="96dp"
+            android:textStyle="bold"
+            android:backgroundTint="#00DDFF"
+            android:typeface="sans"
+            android:fontFamily="sans-serif-condensed"
             android:layout_height="95dp"
             android:id="@+id/scoreButt"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="28dp" />
+            android:layout_marginEnd="28dp"
+            app:layout_constraintVertical_bias="0.497" />
 
     <Button
             android:text="@string/throwButton"
@@ -38,6 +30,10 @@
             android:layout_height="95dp"
             android:id="@+id/throwButt"
             android:textAllCaps="false"
+            android:textStyle="bold"
+            android:backgroundTint="#00DDFF"
+            android:typeface="sans"
+            android:fontFamily="sans-serif-condensed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="32dp"

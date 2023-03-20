@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/winMsgTextView"
-                android:textColor="#FF1F6B"
+                android:textColor="#FD0026"
                 android:textSize="80sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed"
@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/popupClose"
                 android:textStyle="bold"
+                android:backgroundTint="#00DDFF"
                 android:typeface="sans"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_marginTop="20dp" />

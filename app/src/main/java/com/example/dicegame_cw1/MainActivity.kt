@@ -20,12 +20,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_menu)
-
         title = "Welcome to Lucky Dice"
+
         // Getting Extras from game activity
         humanWins = intent.getIntExtra("humanWins", 0)
         computerWins = intent.getIntExtra("computerWins", 0)
-
 
         //Setting actionListener for win count change button
         val editWinCountButton = findViewById<Button>(R.id.editWinCountButton)
@@ -49,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         //Setting actionListener for "New Game" button
         val newGameButt = findViewById<Button>(R.id.newGameButt)
         newGameButt.setOnClickListener {
+            //Pass relevant variables to GameScreen Activity through Extras
             val gameIntent = Intent(this, GameScreen::class.java)
             gameIntent.putExtra("winScore",winScore)
             gameIntent.putExtra("optimiseStrategy",optimiseStrategy)
@@ -58,7 +58,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Makes the ABOUT popup window visible
+
+    /**
+     * makes the about popup visible
+     *
+     * @param view view to anchor the popup window
+     */
     private fun showAboutPopUp(view: View) {
         val aboutPopup = layoutInflater.inflate(R.layout.about_popup_layout, null)
         val popupWindow = PopupWindow(
@@ -75,7 +80,11 @@ class MainActivity : AppCompatActivity() {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
     }
 
-    // Update the Win Threshold for the next game.
+
+    /**
+     * Update the Win Threshold for the next game.
+     *
+     */
     private fun updateWinScore() {
         val winScoreEditText = findViewById<EditText>(R.id.winScoreEdit)
         if (winScoreEditText.text.isNotBlank()) {
@@ -85,10 +94,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Overrides the onSaveInstanceState method
+     * to make the winScore variable immune to configuration changes
+     *
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt("winScore", winScore)
         super.onSaveInstanceState(outState)
     }
+
+    /**
+     *
+     * Restores winScore variable and assigns it to the relevant textView
+     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         winScore = savedInstanceState.getInt("winScore")
         val winScoreTextView = findViewById<TextView>(R.id.currentWinScore)

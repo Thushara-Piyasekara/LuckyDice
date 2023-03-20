@@ -14,4 +14,8 @@
     <string name="default_win_score">Current Win Score : 101</string>
     <string name="you_win">You win!</string>
     <string name="congratulations">Congratulations! :)</string>
+    <string name="human">HUMAN</string>
+    <string name="computer">COMPUTER</string>
+    <string name="h_00_c_00">H: 00 / C: 00</string>
+    <string name="_00_00">00/00</string>
 </resources>
