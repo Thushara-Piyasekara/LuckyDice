@@ -40,6 +40,8 @@ class Dice(private val imageButt: ImageButton) {
      * part from the original code
      * reference 2 :- https://developer.android.com/reference/android/os/Handler
      * Learned about the functionality of Handler Class
+     * reference 3 :- https://www.geeksforgeeks.org/android-rotate-animations-in-kotlin/
+     * Learned how to apply animations to Views
      */
     fun roll() {
         resetDiceBackground()
