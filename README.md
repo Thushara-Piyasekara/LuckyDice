@@ -13,23 +13,15 @@ A human player competes against the computer. Both players throw 5 dice at the s
 can be set by the human before the game starts) by throwing 5 dice as many times as necessary.
 
 ## Screenshots
+<table>
+   <tr>
+    <td> <img src="screenshots/Screenshot1.png"  alt="1" width = 360px></td>
+    <td><img src="screenshots/Screenshot2.png" alt="2" width = 360px></td>
+   </tr> 
+   <tr>
+      <td><img src="screenshots/Screenshot3.png" alt="3" width = 360px></td>
+      <td><img src="screenshots/Screenshot5.png" alt="5" width = 360px></td>
+</table>
 
-#### Home Page
 
-![Alt text](https://github.com/Thushara-Piyasekara/LuckyDice/blob/39063d76efb0a44507a10ad1de71433a11871f3e/screenshots/Screenshot1.png?raw=true "Optional Title")
 
-#### Game Screen 1
-
-![Alt text](https://github.com/Thushara-Piyasekara/LuckyDice/blob/39063d76efb0a44507a10ad1de71433a11871f3e/screenshots/Screenshot2.png?raw=true "Optional Title")
-
-#### Game Screen 2
-
-![Alt text](https://github.com/Thushara-Piyasekara/LuckyDice/blob/39063d76efb0a44507a10ad1de71433a11871f3e/screenshots/Screenshot3.png?raw=true "Optional Title")
-
-#### Game Screen Horizontal
-
-![Alt text](https://github.com/Thushara-Piyasekara/LuckyDice/blob/39063d76efb0a44507a10ad1de71433a11871f3e/screenshots/Screenshot4.png?raw=true "Optional Title")
-
-#### Win Popup
-
-![Alt text](https://github.com/Thushara-Piyasekara/LuckyDice/blob/39063d76efb0a44507a10ad1de71433a11871f3e/screenshots/Screenshot5.png?raw=true "Optional Title")
